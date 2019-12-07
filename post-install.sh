@@ -12,8 +12,7 @@ else
 	cmd=(dialog --separate-output --checklist "Please Select Software you want to install:" 22 76 16)
 	options=(1 "Snap" off    
 	         2 "LAMP Stack" off
-	         3 "Build Essentials" off
-	         4 "Node.js" off
+	         3 "Node.js" off
 	         5 "Git" off
 	         6 "Composer" off
 	         7 "JDK 8" off
@@ -94,10 +93,6 @@ else
 			7)
 				#JDK 8
 				echo "Installing JDK 8"
-				apt install python-software-properties -y
-				add-apt-repository ppa:webupd8team/java -y
-				apt update
-				apt install oracle-java8-installer -y
 				;;
 			8)
 				#Docker
