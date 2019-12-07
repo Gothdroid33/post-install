@@ -36,9 +36,6 @@ else
 			    	#Install LAMP stack
 				echo "Installing Apache"
 				apt install apache2 -y
-	            
-    			echo "Installing Mysql Server"
-	 			apt install mysql-server -y
 
         		echo "Installing PHP"
 				apt install php libapache2-mod-php php-mbstring php-dev php-intl php-gd php-pgsql php-sqlite3 php-pear php-mysql -y
@@ -103,7 +100,7 @@ else
                 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
                 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
                 apt update
-                apt install docker-ce docker-ce-cli containerd.io docker-composer
+                apt install docker-ce docker-ce-cli containerd.io docker-compose
                 adduser $SUDO_USER docker
 				;;
             9)
