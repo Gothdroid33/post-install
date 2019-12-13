@@ -11,15 +11,14 @@ else
 	sudo apt-get install dialog
 	cmd=(dialog --separate-output --checklist "Please Select Software you want to install:" 22 76 16)
 	options=(1 "Snap" off    
-	         2 "LAMP Stack" off
+	         2 "Apache & Php" off
 	         3 "Node.js" off
 	         5 "Git" off
 	         6 "Composer" off
-	         7 "JDK 8" off
-	         8 "Docker" off
-             9 "PhpStorm" off
-             10 "VsCode" off
-             11 "AutoClear && AutoRemove" on)
+	         7 "Docker" off
+             	 8 "PhpStorm" off
+             	 9 "VsCode" off
+               	 10 "AutoClear && AutoRemove" on)
 
 		choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 		clear
@@ -29,25 +28,21 @@ else
 	        1)
 	            	#Install VsCode
 				echo "Installing Snap for Snapcrafter"
-				apt install snapd
+				apt install snapd -y
 				;;
 
 			2)
-			    	#Install LAMP stack
+			    	#Install Apache & Php
 				echo "Installing Apache"
 				apt install apache2 -y
 
         		echo "Installing PHP"
 				apt install php libapache2-mod-php php-mbstring php-dev php-intl php-gd php-pgsql php-sqlite3 php-pear php-mysql -y
-	            
-        		echo "Installing Phpmyadmin"
-				apt install phpmyadmin -y
-
-				echo "Cofiguring apache to run Phpmyadmin"
-				echo "Include /etc/phpmyadmin/apache.conf" >> /etc/apache2/apache2.conf
-				
+				php -v
 				echo "Enabling module rewrite"
 				sudo a2enmod rewrite
+				echo "Enabling module proxy"
+				sudo a2enmod proxy proxy-http
 				echo "Restarting Apache Server"
 				service apache2 restart
 				;;
@@ -67,31 +62,16 @@ else
 
 			5)
 				#Install git
-				echo "Installing Git, please congiure git later..."
+				echo "Installing Git, please congigure git later..."
 				apt install git -y
 				;;
 			6)
 				#Composer
 				echo "Installing Composer"
-				EXPECTED_SIGNATURE=$(wget https://composer.github.io/installer.sig -O - -q)
-				php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-				ACTUAL_SIGNATURE=$(php -r "echo hash_file('SHA384', 'composer-setup.php');")
-
-				if [ "$EXPECTED_SIGNATURE" = "$ACTUAL_SIGNATURE" ]
-				  then
-				php composer-setup.php --quiet --install-dir=/bin --filename=composer
-				RESULT=$?
-				rm composer-setup.php
-				else
-				  >&2 echo 'ERROR: Invalid installer signature'
-				  rm composer-setup.php
-				fi
+				apt intsall composer -y
 				;;
+	
 			7)
-				#JDK 8
-				echo "Installing JDK 8"
-				;;
-			8)
 				#Docker
 				echo "Installing Docker"
 				apt remove docker docker-engine docker.io containerd runc -y
@@ -103,17 +83,17 @@ else
                 apt install docker-ce docker-ce-cli containerd.io docker-compose
                 adduser $SUDO_USER docker
 				;;
-            9)
+            8)
                 #PhpStorm
                 echo "Installing PhpStorm"
                 snap install phpstorm --classic
                 ;;
-            10) 
+            9) 
                 #VsCode
                 echo "Installing VsCode"
                 snap install code --classic
                 ;;
-            11)
+            10)
                 #AutoClean && AutoRemove
                 echo "Clean in progress and reboot"
                 apt autoclean -y && apt autoremove -y
