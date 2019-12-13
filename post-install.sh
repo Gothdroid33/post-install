@@ -42,7 +42,7 @@ else
 				echo "Enabling module rewrite"
 				sudo a2enmod rewrite
 				echo "Enabling module proxy"
-				sudo a2enmod proxy proxy-http
+				sudo a2enmod proxy proxy_http
 				echo "Restarting Apache Server"
 				service apache2 restart
 				;;
@@ -68,7 +68,7 @@ else
 			6)
 				#Composer
 				echo "Installing Composer"
-				apt intsall composer -y
+				apt install composer -y
 				;;
 	
 			7)
