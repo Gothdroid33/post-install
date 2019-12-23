@@ -13,12 +13,12 @@ else
 	options=(1 "Snap" off    
 	         2 "Apache & Php" off
 	         3 "Node.js" off
-	         5 "Git" off
-	         6 "Composer" off
-	         7 "Docker" off
-             	 8 "PhpStorm" off
-             	 9 "VsCode" off
-               	 10 "AutoClear && AutoRemove" on)
+	         4 "Git" off
+	         5 "Composer" off
+	         6 "Docker" off
+             	 7 "PhpStorm" off
+             	 8 "VsCode" off
+               	 9 "AutoClear && AutoRemove" on)
 
 		choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 		clear
@@ -46,13 +46,8 @@ else
 				echo "Restarting Apache Server"
 				service apache2 restart
 				;;
-    		3)	
-				#Install Build Essentials
-				echo "Installing Build Essentials"
-				apt install -y build-essential
-				;;
-				
-			4)
+  				
+			3)
 				#Install Nodejs
 				echo "Installing Nodejs"
 				curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
@@ -60,18 +55,18 @@ else
                 npm i -g yarn
 				;;
 
-			5)
+			4)
 				#Install git
 				echo "Installing Git, please congigure git later..."
 				apt install git -y
 				;;
-			6)
+			5)
 				#Composer
 				echo "Installing Composer"
 				apt install composer -y
 				;;
 	
-			7)
+			6)
 				#Docker
 				echo "Installing Docker"
 				apt remove docker docker-engine docker.io containerd runc -y
@@ -83,17 +78,17 @@ else
                 apt install docker-ce docker-ce-cli containerd.io docker-compose -y
                 adduser $SUDO_USER docker
 				;;
-            8)
+            7)
                 #PhpStorm
                 echo "Installing PhpStorm"
                 snap install phpstorm --classic
                 ;;
-            9) 
+            8) 
                 #VsCode
                 echo "Installing VsCode"
                 snap install code --classic
                 ;;
-            10)
+            9)
                 #AutoClean && AutoRemove
                 echo "Clean in progress and reboot"
                 apt autoclean -y && apt autoremove -y
