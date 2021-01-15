@@ -34,9 +34,13 @@ else
 			2)
 			    	#Install Apache & Php
 				echo "Installing Apache"
+				add-apt-repository ppa:ondrej/apache2 -y
+				apt update
 				apt install apache2 -y
 
         			echo "Installing PHP"
+				add-apt-repository ppa:ondrej/php -y
+				apt update
 				apt install php libapache2-mod-php php-mbstring php-dev php-intl php-gd php-zip php-pgsql php-sqlite3 php-pear php-mysql -y
 				php -v
 				echo "Enabling module rewrite"
