@@ -1,5 +1,7 @@
 #!/bin/bash
 
+PHP_VERSION="7.4"
+
 if [[ $EUID -ne 0 ]]; then
    	echo "This script must be run as root" 
    	exit 1
@@ -41,7 +43,7 @@ else
         			echo "Installing PHP"
 				add-apt-repository ppa:ondrej/php -y
 				apt update
-				apt install php libapache2-mod-php php-mbstring php-dev php-intl php-gd php-zip php-pgsql php-sqlite3 php-pear php-mysql -y
+				apt install php$PHP_VERSION libapache2-mod-php php$PHP_VERSION-mbstring php$PHP_VERSION-dev php$PHP_VERSION-intl php$PHP_VERSION-gd php$PHP_VERSION-zip php$PHP_VERSION-pgsql php$PHP_VERSION-sqlite3 php-pear php$PHP_VERSION-mysql -y
 				php -v
 				echo "Enabling module rewrite"
 				sudo a2enmod rewrite
